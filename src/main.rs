@@ -12,7 +12,15 @@ fn main() {
     // Write a key-value pair
     db.put(b"mykey", b"myvalue").expect("failed to write");
 
-    
+    // Read the value
+    match db.get(b"mykey") {
+        Ok(Some(value)) => println!("Retrieved value: {}", String::from_utf8(value).unwrap()),
+        Ok(None) => println!("Value not found"),
+        Err(e) => println!("Error reading value: {}", e),
+    }
+
+    // Delete the key
+    db.delete(b"mykey").expect("failed to delete key");
 }
 
 
